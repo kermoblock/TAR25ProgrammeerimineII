@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopTAR25.Core.ServiceInterface
 {
-    internal interface ISpaceshipServices
+    public interface ISpaceshipServices
     {
     }
 }
