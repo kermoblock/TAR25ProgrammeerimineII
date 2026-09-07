@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShopTARpe25.Core\ShopTARpe25.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShopTAR25.ApplicationServices.Services
+namespace ShopTARpe25.Core.ServiceInterface
 {
-    internal class SpaceshipServices
+    public interface ISpaceShipServices
     {
     }
 }

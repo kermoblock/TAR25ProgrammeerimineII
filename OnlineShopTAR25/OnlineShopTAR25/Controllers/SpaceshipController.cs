@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ShopTAR25.Controllers
+namespace OnlineShopTAR25.Controllers
 {
     public class SpaceshipController : Controller
     {
@@ -9,6 +9,6 @@ namespace ShopTAR25.Controllers
             return View();
         }
 
-        //teha Data projekti alla ShopTAR25Context nimega class
+        // teha Data projekti alla ShopTARpe25Context nimega class 
     }
 }
