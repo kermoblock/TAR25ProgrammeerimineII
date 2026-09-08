@@ -1,7 +1,13 @@
-﻿
-vaja teha nupp päisemenüüsse, mis suunab Index lehele. Selleks saab kasutada HTML nuppu ja linki. Näiteks:
-Index vaates peab saama edasi minna Create vaatesse.
+﻿@model OnlineShopTAR25.Models.Spaceship.SpaceshipCreateViewModel
 
-@{
-    ViewData["Title"] = "Create Page";
-}
+<div>
+    Spaceship Create
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="CreateAt" type="hidden" />
+    <input asp-for="ModifiedAt" type="hidden" />
+
+
+</form>
