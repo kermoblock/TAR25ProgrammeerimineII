@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopTARpe25.Models.Spaceship;
+using Microsoft.EntityFrameworkCore;
+using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
+using ShopTARpe25.Models.Spaceship;
 
 
 namespace ShopTARpe25.Controllers
@@ -162,5 +164,46 @@ namespace ShopTARpe25.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            var spaceship = await _spaceshipService.Delete(Id);
+            if (spaceship == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new SpaceshipDeleteViewModel();
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.Classification = spaceship.Classification;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.BuiltDate = spaceship.BuiltDate;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+
+
+            return View(vm);
+
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> DeleteConfirmation(Guid Id)
+        {
+            var result = await _spaceshipService.Delete(Id);
+
+                if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
+
