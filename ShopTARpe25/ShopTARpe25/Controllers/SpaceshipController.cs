@@ -169,7 +169,7 @@ namespace ShopTARpe25.Controllers
 
         public async Task<IActionResult> Delete(Guid Id)
         {
-            var spaceship = await _spaceshipService.Delete(Id);
+            var spaceship = await _spaceshipService.DetailsAsync(Id);
             if (spaceship == null)
             {
                 return NotFound();
