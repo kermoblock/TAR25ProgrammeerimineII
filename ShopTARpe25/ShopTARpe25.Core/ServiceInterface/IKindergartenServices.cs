@@ -4,7 +4,7 @@ using ShopTARpe25.Core.Dto;
 
 namespace ShopTARpe25.Core.ServiceInterface
 {
-    public interface ISpaceshipServices
+    public interface IKindergartenServices
     {
         Task<Kindergarten> Create(KindergartenDto dto);
         Task<Kindergarten> DetailsAsync(Guid id);
