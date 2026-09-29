@@ -164,7 +164,7 @@ namespace ShopTARpe25.Controllers
 
         public async Task<IActionResult> Delete(Guid Id)
         {
-            var kindergarten = await _kindergartenService.Delete(Id);
+            var kindergarten = await _kindergartenService.DetailsAsync(Id);
             if (kindergarten == null)
             {
                 return NotFound();
