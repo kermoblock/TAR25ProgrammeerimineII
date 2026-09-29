@@ -10,7 +10,7 @@ namespace ShopTARpe25.ApplicationServices.Services
 {
 
 
-    public class SpaceshipServices : ISpaceshipServices
+    public class SpaceshipServices : IKindergartenServices
     {
         private readonly ShopTARpe25Context _context;
 
@@ -21,9 +21,9 @@ namespace ShopTARpe25.ApplicationServices.Services
         {
             _context = context;
         }
-        public async Task<Spaceship> Create(SpaceshipDto dto)
+        public async Task<Kindergarten> Create(KindergartenDto dto)
         {
-            Spaceship domain = new();
+            Kindergarten domain = new();
 
             domain.Id = dto.Id;
             domain.Name = dto.Name;
@@ -47,7 +47,7 @@ namespace ShopTARpe25.ApplicationServices.Services
 
         }
 
-        public async Task<Spaceship> DetailsAsync(Guid id)
+        public async Task<Kindergarten> DetailsAsync(Guid id)
         {
             var result = await _context.Spaceships
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -56,9 +56,9 @@ namespace ShopTARpe25.ApplicationServices.Services
             return result;
         }
 
-        public async Task<Spaceship> Update(SpaceshipDto dto)
+        public async Task<Kindergarten> Update(KindergartenDto dto)
         {
-            Spaceship spaceship = new();
+            Kindergarten spaceship = new();
 
             spaceship.Id = dto.Id;
             spaceship.Name = dto.Name;
@@ -75,7 +75,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             return spaceship;
         }
 
-        public async Task<Spaceship> Delete(Guid Id)
+        public async Task<Kindergarten> Delete(Guid Id)
         {
 
             var result = await _context.Spaceships

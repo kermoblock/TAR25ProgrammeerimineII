@@ -11,7 +11,7 @@ namespace ShopTARpe25.Controllers
 {
     public class SpaceshipController : Controller
     {
-        private readonly ISpaceshipServices _spaceshipService;
+        private readonly IKindergartenServices _spaceshipService;
         private readonly ShopTARpe25Context _context;
 
         //teha constructor et saaks kasutada teenust, mis on
@@ -20,7 +20,7 @@ namespace ShopTARpe25.Controllers
 
         public SpaceshipController
             (
-                ISpaceshipServices spaceshipService,
+                IKindergartenServices spaceshipService,
                 ShopTARpe25Context context
             )
         {
@@ -63,7 +63,7 @@ namespace ShopTARpe25.Controllers
             //luua vaheinstants, mis sisaldab andmeid, mis on saadud vormist
             //need andmed tuleb edasi saata dto-sse, mis on mõeldud andmebaasi salvestamiseks
 
-            var dto = new SpaceshipDto
+            var dto = new KindergartenDto
             {
                 Name = vm.Name,
                 Classification = vm.Classification,
@@ -143,7 +143,7 @@ namespace ShopTARpe25.Controllers
 
         public async Task<IActionResult> Update(SpaceshipUpdateViewModel vm)
         {
-            var dto = new SpaceshipDto()
+            var dto = new KindergartenDto()
             {
                 Id = vm.Id,
                 Name = vm.Name,
