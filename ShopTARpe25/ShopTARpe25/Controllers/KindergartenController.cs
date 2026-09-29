@@ -9,22 +9,22 @@ using ShopTARpe25.Models.Spaceship;
 
 namespace ShopTARpe25.Controllers
 {
-    public class SpaceshipController : Controller
+    public class KindergartenController : Controller
     {
-        private readonly IKindergartenServices _spaceshipService;
+        private readonly IKindergartenServices _kindergartenService;
         private readonly ShopTARpe25Context _context;
 
         //teha constructor et saaks kasutada teenust, mis on
         //defineeritud ISpaceshipServices liideses
 
 
-        public SpaceshipController
+        public KindergartenController
             (
-                IKindergartenServices spaceshipService,
+                IKindergartenServices kindergartenService,
                 ShopTARpe25Context context
             )
         {
-            _spaceshipService = spaceshipService;
+            _kindergartenService = kindergartenService;
             _context = context;
         }
 
@@ -32,15 +32,14 @@ namespace ShopTARpe25.Controllers
         public IActionResult Index()
         {
             //loome baheinstantsi domaini ja viewmodeli vahel
-            var result = _context.Spaceships
-                .Select(x => new SpaceshipIndexViewModel
+            var result = _context.Kindergartens
+                .Select(x => new KindergartenIndexViewModel
                 {
                     Id = x.Id,
-                    Name = x.Name,
-                    Classification = x.Classification,
-                    BuiltDate = x.BuiltDate,
-                    Crew = x.Crew,
-                    EnginePower = x.EnginePower
+                    GroupName = x.GroupName,
+                    ChildrenCount = x.ChildrenCount,
+                    KindergartenName = x.KindergartenName,
+                    TeacherName = x.TeacherName
                 });
 
 
@@ -58,22 +57,21 @@ namespace ShopTARpe25.Controllers
         //kui oled teinud vormi, siis see meetod käivitatakse
         //saadab andmed serverisse, kus need salvestatakse andmebaasi
         [HttpPost]
-        public async Task<IActionResult> Create(SpaceshipCreateViewModel vm)
+        public async Task<IActionResult> Create(KindergartenCreateViewModel vm)
         {
             //luua vaheinstants, mis sisaldab andmeid, mis on saadud vormist
             //need andmed tuleb edasi saata dto-sse, mis on mõeldud andmebaasi salvestamiseks
 
             var dto = new KindergartenDto
             {
-                Name = vm.Name,
-                Classification = vm.Classification,
-                BuiltDate = vm.BuiltDate,
-                Crew = vm.Crew,
-                EnginePower = vm.EnginePower
+                GroupName = vm.GroupName,
+                ChildrenCount = vm.ChildrenCount,
+                KindergartenName = vm.KindergartenName,
+                TeacherName = vm.TeacherName
             };
 
             //kutsuda teenuse meetodit, mis salvestab andmed andmebaasi
-            var result = await _spaceshipService.Create(dto);
+            var result = await _kindergartenService.Create(dto);
 
             return RedirectToAction(nameof(Index));
         }
@@ -86,25 +84,24 @@ namespace ShopTARpe25.Controllers
         public async Task<IActionResult> Details(Guid Id)
         {
             //meetodi kutsumine interfaceist
-            var spaceship = await _spaceshipService.DetailsAsync(Id);
+            var kindergarten = await _kindergartenService.DetailsAsync(Id);
 
             //veakäsitlus
             //suunab vaatele NotFound, kui andmeid ei ole
-            if (spaceship == null)
+            if (kindergarten == null)
             {
                 return NotFound();
             }
 
-            var vm = new SpaceshipDetailsViewModel();
+            var vm = new KindergartenDetailsViewModel();
 
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.Crew = spaceship.Crew;
+            vm.Id = kindergarten.Id;
+            vm.GroupName = kindergarten.GroupName;
+            vm.ChildrenCount = kindergarten.ChildrenCount;
+            vm.KindergartenName = kindergarten.KindergartenName;
+            vm.TeacherName = kindergarten.TeacherName;
             vm.CreatedAt = DateTime.Now;
-            vm.ModifiedAt = DateTime.Now;
+            vm.UpdatedAt = DateTime.Now;
 
 
             return View(vm);
@@ -117,23 +114,22 @@ namespace ShopTARpe25.Controllers
 
         public async Task<IActionResult> Update(Guid id)
         {
-            var spaceship = await _spaceshipService.DetailsAsync(id);
+            var kindergarten = await _kindergartenService.DetailsAsync(id);
 
-            if (spaceship == null)
+            if (kindergarten == null)
             {
                 return NotFound();
             }
 
-            var vm = new SpaceshipUpdateViewModel();
+            var vm = new KindergartenUpdateViewModel();
 
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.Crew = spaceship.Crew;
-            vm.CreatedAt = spaceship.CreatedAt;
-            vm.ModifiedAt = spaceship.ModifiedAt;
+            vm.Id = kindergarten.Id;
+            vm.GroupName = kindergarten.GroupName;
+            vm.ChildrenCount = kindergarten.ChildrenCount;
+            vm.KindergartenName = kindergarten.KindergartenName;
+            vm.TeacherName = kindergarten.TeacherName;
+            vm.CreatedAt = kindergarten.CreatedAt;
+            vm.UpdatedAt = kindergarten.UpdatedAt;
 
 
             return View(vm);
@@ -141,21 +137,20 @@ namespace ShopTARpe25.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Update(SpaceshipUpdateViewModel vm)
+        public async Task<IActionResult> Update(KindergartenUpdateViewModel vm)
         {
             var dto = new KindergartenDto()
             {
                 Id = vm.Id,
-                Name = vm.Name,
-                Classification = vm.Classification,
-                Crew = vm.Crew,
-                EnginePower = vm.EnginePower,
-                BuiltDate = vm.BuiltDate,
+                GroupName = vm.GroupName,
+                ChildrenCount = vm.ChildrenCount,
+                KindergartenName = vm.KindergartenName,
+                TeacherName = vm.TeacherName,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt
+                UpdatedAt = vm.UpdatedAt
             };
 
-            var result = await _spaceshipService.Update(dto);
+            var result = await _kindergartenService.Update(dto);
 
             if (result == null)
             {
@@ -169,22 +164,21 @@ namespace ShopTARpe25.Controllers
 
         public async Task<IActionResult> Delete(Guid Id)
         {
-            var spaceship = await _spaceshipService.Delete(Id);
-            if (spaceship == null)
+            var kindergarten = await _kindergartenService.Delete(Id);
+            if (kindergarten == null)
             {
                 return NotFound();
             }
 
-            var vm = new SpaceshipDeleteViewModel();
+            var vm = new KindergartenDeleteViewModel();
 
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Classification = spaceship.Classification;
-            vm.Crew = spaceship.Crew;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.CreatedAt = spaceship.CreatedAt;
-            vm.ModifiedAt = spaceship.ModifiedAt;
+            vm.Id = kindergarten.Id;
+            vm.GroupName = kindergarten.GroupName;
+            vm.ChildrenCount = kindergarten.ChildrenCount;
+            vm.KindergartenName = kindergarten.KindergartenName;
+            vm.TeacherName = kindergarten.TeacherName;
+            vm.CreatedAt = kindergarten.CreatedAt;
+            vm.UpdatedAt = kindergarten.UpdatedAt;
 
 
             return View(vm);
@@ -195,7 +189,7 @@ namespace ShopTARpe25.Controllers
 
         public async Task<IActionResult> DeleteConfirmation(Guid Id)
         {
-            var result = await _spaceshipService.Delete(Id);
+            var result = await _kindergartenService.Delete(Id);
 
                 if (result == null)
             {
