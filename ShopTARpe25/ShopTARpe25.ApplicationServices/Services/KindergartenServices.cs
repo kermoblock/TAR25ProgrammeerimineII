@@ -10,11 +10,11 @@ namespace ShopTARpe25.ApplicationServices.Services
 {
 
 
-    public class SpaceshipServices : IKindergartenServices
+    public class KindergartenServices : IKindergartenServices
     {
         private readonly ShopTARpe25Context _context;
 
-        public SpaceshipServices
+        public KindergartenServices
             (
                 ShopTARpe25Context context
             )
@@ -26,13 +26,12 @@ namespace ShopTARpe25.ApplicationServices.Services
             Kindergarten domain = new();
 
             domain.Id = dto.Id;
-            domain.Name = dto.Name;
-            domain.Classification = dto.Classification;
-            domain.BuiltDate = dto.BuiltDate;
-            domain.Crew = dto.Crew;
-            domain.EnginePower = dto.EnginePower;
+            domain.GroupName = dto.GroupName;
+            domain.ChildrenCount = dto.ChildrenCount;
+            domain.KindergartenName = dto.KindergartenName;
+            domain.TeacherName = dto.TeacherName;
             domain.CreatedAt = DateTime.Now;
-            domain.ModifiedAt = DateTime.Now;
+            domain.UpdatedAt = DateTime.Now;
 
             //siia tuleb kood, mis salvestab domain
             //objekti andmebaasi
@@ -40,7 +39,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             //on defineeritud Core projektis
             //konstruktori kaudu tuleb injectida repository
 
-            await _context.Spaceships.AddAsync(domain);
+            await _context.Kindergartens.AddAsync(domain);
             await _context.SaveChangesAsync();
 
             return domain;
@@ -49,7 +48,7 @@ namespace ShopTARpe25.ApplicationServices.Services
 
         public async Task<Kindergarten> DetailsAsync(Guid id)
         {
-            var result = await _context.Spaceships
+            var result = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == id);
 
 
@@ -61,15 +60,14 @@ namespace ShopTARpe25.ApplicationServices.Services
             Kindergarten spaceship = new();
 
             spaceship.Id = dto.Id;
-            spaceship.Name = dto.Name;
-            spaceship.Classification = dto.Classification;
-            spaceship.BuiltDate = dto.BuiltDate;
-            spaceship.Crew = dto.Crew;
-            spaceship.EnginePower = dto.EnginePower;
+            spaceship.GroupName = dto.GroupName;
+            spaceship.ChildrenCount = dto.ChildrenCount;
+            spaceship.KindergartenName = dto.KindergartenName;
+            spaceship.TeacherName = dto.TeacherName;
             spaceship.CreatedAt = dto.CreatedAt;
-            spaceship.ModifiedAt = DateTime.Now;
+            spaceship.UpdatedAt = DateTime.Now;
 
-            _context.Spaceships.Update(spaceship);
+            _context.Kindergartens.Update(spaceship);
             await _context.SaveChangesAsync();
 
             return spaceship;
@@ -78,11 +76,11 @@ namespace ShopTARpe25.ApplicationServices.Services
         public async Task<Kindergarten> Delete(Guid Id)
         {
 
-            var result = await _context.Spaceships
+            var result = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == Id);
 
 
-            _context.Spaceships.Remove(result);
+            _context.Kindergartens.Remove(result);
             await _context.SaveChangesAsync();
 
             return result;
