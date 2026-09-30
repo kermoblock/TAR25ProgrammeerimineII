@@ -100,7 +100,7 @@ namespace ShopTARpe25.Controllers
             vm.ChildrenCount = kindergarten.ChildrenCount;
             vm.KindergartenName = kindergarten.KindergartenName;
             vm.TeacherName = kindergarten.TeacherName;
-            vm.CreatedAt = kindergarten.Cr;
+            vm.CreatedAt = kindergarten.CreatedAt;
             vm.UpdatedAt = kindergarten.UpdatedAt;
 
 
