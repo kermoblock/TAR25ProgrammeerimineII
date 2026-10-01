@@ -4,6 +4,7 @@ using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
 
+
 namespace ShopTARpe25.ApplicationServices.Services
 {
     public class FileServices : IFileServices
@@ -22,7 +23,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             _webHost = webHost;
         }
 
-        public void FilesToAPI(SpaceshipDto dto, Spaceship domain)
+        public void FilesToApi(SpaceshipDto dto, Spaceship domain)
         {
             //kindlasti peab ankeedil olema üks fail
             if (dto.Files != null && dto.Files.Count > 0)
