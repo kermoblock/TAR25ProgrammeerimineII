@@ -61,11 +61,13 @@
             @Html.DisplayFor(Model => Model.ModifiedAt)
         </div>
     </dl>
+    </div>
 
     @foreach(var images in Model.Images)
     {
         <partial name="_Images" model="images" />
+        <br />
     }
-
-    <a asp-action="Index" asp-controller="spaceship" class="btn btn-danger">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index" asp-controller="Spaceship" class="btn btn-danger">Back to List</a>
+    </div>
