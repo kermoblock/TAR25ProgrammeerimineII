@@ -57,20 +57,21 @@ namespace ShopTARpe25.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            SpaceshipCreateViewModel vm = new();
+            SpaceshipCreateUpdateViewModel vm = new();
             return View(vm);
         }
 
         //kui oled teinud vormi, siis see meetod käivitatakse
         //saadab andmed serverisse, kus need salvestatakse andmebaasi
         [HttpPost]
-        public async Task<IActionResult> Create(SpaceshipCreateViewModel vm)
+        public async Task<IActionResult> Create(SpaceshipCreateUpdateViewModel vm)
         {
             //luua vaheinstants, mis sisaldab andmeid, mis on saadud vormist
             //need andmed tuleb edasi saata dto-sse, mis on mõeldud andmebaasi salvestamiseks
 
             var dto = new SpaceshipDto
             {
+                Id = vm.Id,
                 Name = vm.Name,
                 Classification = vm.Classification,
                 BuiltDate = vm.BuiltDate,
