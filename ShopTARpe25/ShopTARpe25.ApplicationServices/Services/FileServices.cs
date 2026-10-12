@@ -4,6 +4,7 @@ using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace ShopTARpe25.ApplicationServices.Services
@@ -88,6 +89,30 @@ namespace ShopTARpe25.ApplicationServices.Services
 
             return imageId;
             
+        }
+
+        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dto)
+        {
+            foreach (var image in dto)
+            {
+                //kui on vaja kustutada fail, siis tuleb see üles leida
+                var imageId = await _context.FileToApis
+                    .FirstOrDefaultAsync(x => x.Id == image.Id);
+
+                //kus asuvad failid, mida hakatakse kustutama
+                var filepath = _webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\"
+                    + imageId.ExistingFilePath;
+
+                //kui fail on olemas, siis kustuta see
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                _context.FileToApis.Remove(imageId);
+                await _context.SaveChangesAsync();
+            }
+
+            return null;
         }
     }
 }
