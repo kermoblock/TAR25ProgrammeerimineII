@@ -13,5 +13,7 @@ namespace ShopTARpe25.Data
         }
 
         public DbSet<Kindergarten> Kindergartens { get; set; }
+
+        public DbSet<FileToApi> FileToApis { get; set; }
     }
 }
