@@ -9,5 +9,8 @@ namespace ShopTARpe25.Core.ServiceInterface
     public interface IFileService
     {
         void FilesToAPI(KindergartenDto dto, Kindergarten domain);
+
+        Task<FileToApi> RemoveImageFromApi(FileToApiDto dto);
+        Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dto);
     }
 }

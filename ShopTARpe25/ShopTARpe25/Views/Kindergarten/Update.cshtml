@@ -37,5 +37,12 @@
                class="btn btn-outline-success"
                value="Update" />
 
+        @foreach (var file in Model.Images)
+        {
+            <partial name="_Images" model="file" />
+        }
+
+        <a asp-action="Index" asp-controller="kindergarten" class=" btn btn-outline-success" />Back to list </a>
+
     </form>
 </div>
