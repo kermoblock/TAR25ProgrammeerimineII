@@ -75,7 +75,7 @@ namespace ShopTARpe25.Controllers
                     {
                         Id = file.ImageId,
                         ExistingFilePath = file.FilePath,
-                        KindergartenId = file.SpaceshipId
+                        KindergartenId = file.KindergartenId
                     }).ToArray()
             };
 

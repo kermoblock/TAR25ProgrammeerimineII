@@ -44,7 +44,7 @@ namespace ShopTARpe25.ApplicationServices.Services
                     string uploadsFolder = Path.Combine(_webHost.ContentRootPath, "wwwroot", "multipleFileUpload");
 
                     //igale failile unikaalne Guid selle nime ette
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.Name;
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
                    //kombineerib faili Id ja upload folderi, et saada pathi
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
