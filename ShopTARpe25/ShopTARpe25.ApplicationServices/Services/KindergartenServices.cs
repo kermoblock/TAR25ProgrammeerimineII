@@ -13,13 +13,16 @@ namespace ShopTARpe25.ApplicationServices.Services
     public class KindergartenServices : IKindergartenServices
     {
         private readonly ShopTARpe25Context _context;
+        private readonly IFileService _fileServices;
 
         public KindergartenServices
             (
-                ShopTARpe25Context context
+                ShopTARpe25Context context,
+                IFileService fileService
             )
         {
             _context = context;
+            _fileServices = fileService;
         }
         public async Task<Kindergarten> Create(KindergartenDto dto)
         {
@@ -32,6 +35,11 @@ namespace ShopTARpe25.ApplicationServices.Services
             domain.TeacherName = dto.TeacherName;
             domain.CreatedAt = DateTime.Now;
             domain.UpdatedAt = DateTime.Now;
+
+            //kutsub file teenusest välja meetod,
+            //mis salvestab failid serverisse
+            _fileServices.FilesToAPI(dto, domain);
+
 
             //siia tuleb kood, mis salvestab domain
             //objekti andmebaasi
