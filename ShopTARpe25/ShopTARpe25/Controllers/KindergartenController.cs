@@ -102,6 +102,14 @@ namespace ShopTARpe25.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.KindergartenId == Id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
+
             var vm = new KindergartenDetailsViewModel();
 
             vm.Id = kindergarten.Id;
@@ -111,7 +119,7 @@ namespace ShopTARpe25.Controllers
             vm.TeacherName = kindergarten.TeacherName;
             vm.CreatedAt = kindergarten.CreatedAt;
             vm.UpdatedAt = kindergarten.UpdatedAt;
-
+            vm.Images.AddRange(images);
 
             return View(vm);
 
