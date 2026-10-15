@@ -52,6 +52,17 @@ namespace ShopTARpe25.ApplicationServices.Services
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         file.CopyTo(fileStream);
+
+                        //domaini teha FileToApi
+                        //FileToApi
+                        FileToApi path = new FileToApi
+                        {
+                            Id = Guid.NewGuid(),
+                            ExistingFilePath = uniqueFileName,
+                            KindergartenId = domain.Id
+                        };
+
+                        _context.FileToApis.AddAsync(path);
                     }
                 }
             }

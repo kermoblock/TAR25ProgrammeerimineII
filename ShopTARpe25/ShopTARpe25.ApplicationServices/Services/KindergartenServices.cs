@@ -25,7 +25,7 @@ namespace ShopTARpe25.ApplicationServices.Services
         {
             Kindergarten domain = new();
 
-            domain.Id = dto.Id;
+            domain.Id = Guid.NewGuid();
             domain.GroupName = dto.GroupName;
             domain.ChildrenCount = dto.ChildrenCount;
             domain.KindergartenName = dto.KindergartenName;
