@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ShopTARpe25.ApplicationServices.Services;
 using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
@@ -13,6 +14,7 @@ namespace ShopTARpe25.Controllers
     {
         private readonly IKindergartenServices _kindergartenService;
         private readonly ShopTARpe25Context _context;
+        private readonly IFileService _fileService;
 
         //teha constructor et saaks kasutada teenust, mis on
         //defineeritud ISpaceshipServices liideses
@@ -21,11 +23,13 @@ namespace ShopTARpe25.Controllers
         public KindergartenController
             (
                 IKindergartenServices kindergartenService,
-                ShopTARpe25Context context
+                ShopTARpe25Context context,
+                IFileService fileService
             )
         {
             _kindergartenService = kindergartenService;
             _context = context;
+            _fileService = fileService;
         }
 
 
@@ -165,7 +169,8 @@ namespace ShopTARpe25.Controllers
 
         public async Task<IActionResult> Update(KindergartenUpdateViewModel vm)
         {
-            var dto = new KindergartenDto()
+            var dto = new KindergartenDto
+
             {
                 Id = vm.Id,
                 GroupName = vm.GroupName,
@@ -173,7 +178,15 @@ namespace ShopTARpe25.Controllers
                 KindergartenName = vm.KindergartenName,
                 TeacherName = vm.TeacherName,
                 CreatedAt = vm.CreatedAt,
-                UpdatedAt = vm.UpdatedAt
+                UpdatedAt = vm.UpdatedAt,
+                Files = vm.Files,
+                FileToApiDtos = vm.Images
+                    .Select(file => new FileToApiDto
+                    {
+                        Id = file.ImageId,
+                        ExistingFilePath = file.FilePath,
+                        KindergartenId = file.KindergartenId
+                    }).ToArray()
             };
 
             var result = await _kindergartenService.Update(dto);
@@ -231,6 +244,25 @@ namespace ShopTARpe25.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(ImageViewModel vm)
+        {
+            //tuleb ühendada dto ja viewmodel
+            var dto = new FileToApiDto()
+            {
+                Id = vm.ImageId
+            };
+
+            //kutsuda tenuse meetodit, mis kustutab pildi andmebaasist
+            var image = await _fileService.RemoveImageFromApi(dto);
+            if (image == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }

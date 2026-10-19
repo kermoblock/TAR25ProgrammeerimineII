@@ -74,6 +74,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             spaceship.TeacherName = dto.TeacherName;
             spaceship.CreatedAt = dto.CreatedAt;
             spaceship.UpdatedAt = DateTime.Now;
+            _fileServices.FilesToAPI(dto, spaceship);
 
             _context.Kindergartens.Update(spaceship);
             await _context.SaveChangesAsync();
@@ -86,6 +87,18 @@ namespace ShopTARpe25.ApplicationServices.Services
 
             var result = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == Id);
+
+            var images = await _context.FileToApis
+            .Where(x => x.KindergartenId == Id)
+            .Select(y => new FileToApiDto
+            {
+                Id = y.Id,
+                KindergartenId = y.KindergartenId,
+                ExistingFilePath = y.ExistingFilePath
+            }).ToArrayAsync();
+
+            //peame kutsuma meetodi esile, mis kustutab failid serverist
+            await _fileServices.RemoveImagesFromApi(images);
 
 
             _context.Kindergartens.Remove(result);

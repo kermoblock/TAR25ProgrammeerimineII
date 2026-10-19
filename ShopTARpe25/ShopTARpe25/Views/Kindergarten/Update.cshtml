@@ -40,6 +40,15 @@
         @foreach (var file in Model.Images)
         {
             <partial name="_Images" model="file" />
+            <button type="submit"
+                    formaction="@Url.Action("RemoveImage", "Kindergarten")"
+                    formmethod="post"
+                    name="ImageId"
+                    value="@file.ImageId"
+                    class="btn btn-danger">
+                Remove Image
+            </button>
+            <br />
         }
 
         <a asp-action="Index" asp-controller="kindergarten" class=" btn btn-outline-success" />Back to list </a>

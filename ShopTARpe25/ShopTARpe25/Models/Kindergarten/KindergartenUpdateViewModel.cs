@@ -12,5 +12,7 @@
 
         public List<ImageViewModel> Images { get; set; }
             = new List<ImageViewModel>();
+
+        public List<IFormFile> Files { get; set; }
     }
 }
