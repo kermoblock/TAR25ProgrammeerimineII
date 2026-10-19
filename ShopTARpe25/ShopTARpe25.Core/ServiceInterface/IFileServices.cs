@@ -8,10 +8,10 @@ namespace ShopTARpe25.Core.ServiceInterface
 {
     public interface IFileServices
     {
-        void FilesToApi(SpaceshipDto dto, Spaceship domain);
+        void FilesToApi(SpaceshipDto dto, Book domain);
 
-        Task<FileToApi> RemoveImageFromApi(FileToApiDto dto);
-        Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dto);
+        Task<Reader> RemoveImageFromApi(FileToApiDto dto);
+        Task<List<Reader>> RemoveImagesFromApi(FileToApiDto[] dto);
 
     }
 }
