@@ -26,7 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\multipleFileUpload\" />
+	  <ProjectReference Include="..\Library.ApplicationServices\Library.ApplicationServices.csproj" />
+	  <ProjectReference Include="..\Library.Core\Library.Core.csproj" />
+	  <ProjectReference Include="..\Library.Data\Library.Data.csproj" />
   </ItemGroup>
 
 </Project>

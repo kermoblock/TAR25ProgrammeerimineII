@@ -2,6 +2,7 @@
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
+using ShopTARpe25.LINQ;
 using ShopTARpe25.Models.Library;
 
 namespace ShopTARpe25.Controllers.Library
@@ -10,15 +11,18 @@ namespace ShopTARpe25.Controllers.Library
     {
         private readonly IBookServices _bookServices;
         private readonly LibraryContext _context;
+        private readonly LINQSorting _linqSorting;
 
         public BookController
             (
             IBookServices bookServices,
-            LibraryContext context
+            LibraryContext context,
+            LINQSorting linqSorting
             )
         {
             _bookServices = bookServices;
             _context = context;
+            _linqSorting = linqSorting;
         }
 
         [HttpGet]
@@ -27,6 +31,7 @@ namespace ShopTARpe25.Controllers.Library
             BookCreateViewModel vm = new();
 
             return View(vm);
+            
         }
         public IActionResult Index()
         {
