@@ -10,28 +10,22 @@ namespace ShopTARpe25
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
+            builder.Services.AddScoped<IBookServices, BookServices>();
+            builder.Services.AddScoped<ILoanServices, LoanServices>();
+            builder.Services.AddScoped<IReaderServices, ReaderServices>();
 
-            //see on dependancy injection, mis võimaldab meil kasutada teenuseid controllerites
-            builder.Services.AddScoped<IFileServices, FileServices>();
 
-            //selleks, et tuleb installida Microsoft.EntityFrameworkCore.SqlServer
-            //ja Microsoft.EntityFrameworkCore.Tools NuGet paketid
-            //kui installitud, siis viidata namespacesis Microsoft.EntityFrameworkCore-le
-            builder.Services.AddDbContext<ShopTARpe25Context>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            // Seadistame andmebaasiühenduse appsettings.json failis oleva ConnectionStrings abil.
+            builder.Services.AddDbContext<LibraryContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("LibraryContext")));
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
