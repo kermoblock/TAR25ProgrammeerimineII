@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopTARpe25.ApplicationServices.Services
 {
-    internal class ReaderServices
+    public class ReaderServices
     {
     }
 }
