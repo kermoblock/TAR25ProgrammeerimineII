@@ -26,12 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <ProjectReference Include="..\Library.Core\Library.Core.csproj" />
-	  <ProjectReference Include="..\Library.Data\Library.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Reader\" />
+	  <ProjectReference Include="..\ShopTARpe25.ApplicationServices\ShopTARpe25.ApplicationServices.csproj" />
+	  <ProjectReference Include="..\ShopTARpe25.Core\ShopTARpe25.Core.csproj" />
+	  <ProjectReference Include="..\ShopTARpe25.Data\ShopTARpe25.Data.csproj" />
   </ItemGroup>
 
 </Project>

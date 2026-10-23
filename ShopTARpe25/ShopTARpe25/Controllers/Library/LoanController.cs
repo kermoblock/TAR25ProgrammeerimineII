@@ -11,9 +11,11 @@ namespace ShopTARpe25.Controllers.Library
         private readonly ILoanServices _loanServices;
         private readonly LibraryContext _context;
 
-        public LoanController(
-            ILoanServices loanServices,
-            LibraryContext context)
+        public LoanController
+            (
+                ILoanServices loanServices,
+                LibraryContext context
+            )
         {
             _loanServices = loanServices;
             _context = context;

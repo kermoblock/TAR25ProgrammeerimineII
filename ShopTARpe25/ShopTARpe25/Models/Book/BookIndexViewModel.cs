@@ -8,6 +8,5 @@
         public int PublishedYear { get; set; }
         public bool IsAvailable { get; set; }
 
-        ww
     }
 }
