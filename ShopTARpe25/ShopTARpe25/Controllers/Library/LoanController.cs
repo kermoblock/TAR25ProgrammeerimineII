@@ -1,0 +1,6 @@
+﻿namespace ShopTARpe25.Controllers.Library
+{
+    public class LoanController
+    {
+    }
+}

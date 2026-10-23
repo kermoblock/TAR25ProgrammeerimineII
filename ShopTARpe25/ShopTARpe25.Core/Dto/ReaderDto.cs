@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ShopTARpe25.Core.Dto
 {
-    internal class ReaderDto
+    public class ReaderDto
     {
+        public Guid Id { get; set; }
+        public string FullName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
     }
 }
