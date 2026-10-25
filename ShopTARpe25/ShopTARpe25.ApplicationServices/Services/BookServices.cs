@@ -2,10 +2,7 @@
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using static ShopTARpe25.ApplicationServices.Services.BookServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopTARpe25.ApplicationServices.Services
 {
@@ -32,6 +29,39 @@ namespace ShopTARpe25.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return domain;
+        }
+
+        public async Task<Book> Update(BookDto dto)
+        {
+            var books = await _context.Books
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+            if (books == null)
+            {
+                return null;
+            }
+
+            books.Id = dto.Id;
+            books.Title = dto.Title;
+
+            await _context.SaveChangesAsync();
+
+            return books;
+        }
+        public async Task<Book?> Delete(Guid id)
+        {
+            var result = await _context.Books
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (result == null)
+            {
+                return null;
+            }
+
+            _context.Books.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }

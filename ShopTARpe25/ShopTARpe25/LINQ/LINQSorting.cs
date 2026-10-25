@@ -32,5 +32,10 @@ namespace ShopTARpe25.LINQ
                 .Where(x => x.ReaderId == ReaderId)
                 .ToList();
         }
+
+        internal List<Book> FindBooksByYear(List<Book> books, string year)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

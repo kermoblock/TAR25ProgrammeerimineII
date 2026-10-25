@@ -9,5 +9,6 @@ namespace ShopTARpe25.Core.ServiceInterface
     public interface ILoanServices
     {
         Task<Loan> Create(LoanDto dto);
+        Task<Loan> BookReturn(LoanDto dto);
     }
 }
