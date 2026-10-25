@@ -1,1 +1,60 @@
 ﻿@model ShopTARpe25.Models.Book.BookDeleteViewModel
+
+<h1>Delete</h1>
+
+<div>
+    <h4>Books</h4>
+    <hr />
+
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Id)
+        </div>
+    </dl>
+
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Title" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Title)
+        </div>
+    </dl>
+
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Author" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Author)
+        </div>
+    </dl>
+
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="PublishedYear" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.PublishedYear)
+        </div>
+    </dl>
+
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="IsAvailable" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.IsAvailable)
+        </div>
+    </dl>
+    <hr />
+    <div>
+
+        <form asp-action="DeleteConfirmation" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <button type="submit" class="btn btn-outline-danger">
+                Delete
+            </button>
+
+            <a asp-action="Index"
+               asp-controller="Book"
+               class="btn btn-outline-info">
+                Back
+            </a>
+        </form>
+    </div>
+</div>

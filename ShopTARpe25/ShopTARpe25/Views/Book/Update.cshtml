@@ -1,0 +1,22 @@
+﻿@model ShopTARpe25.Models.Book.UpdateBookTitleViewModel
+
+<h1>Update Title</h1>
+<br />
+<div>
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Id" type="hidden" />
+        <div class="form-group row">
+            <label asp-for="Title" class="col-sm-2 col-form-label"><h2>Title:</h2></label>
+            <div class="col-sm-5">
+                <input asp-for="Title" class="form-control" />
+            </div>
+        </div>
+
+        <div>
+            <input asp-action="Update" asp-controller="Book"
+                   type="submit" class="btn btn-sm btn-outline-primary rounded-3" value="Update" />
+            <a asp-action="Index" asp-controller="Book"
+               class="btn btn-sm btn-outline-primary rounded-3">Back to list</a>
+        </div>
+    </form>
+</div>
