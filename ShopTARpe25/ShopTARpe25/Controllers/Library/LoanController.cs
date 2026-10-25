@@ -42,7 +42,9 @@ namespace ShopTARpe25.Controllers.Library
                 {
                     Id = x.Id,
                     BookId = x.BookId,
+                    Title = x.Book.Title,
                     ReaderId = x.ReaderId,
+                    FullName = x.Reader.FullName,
                     LoanDate = x.LoanDate,
                     ReturnDate = x.ReturnDate
                 })

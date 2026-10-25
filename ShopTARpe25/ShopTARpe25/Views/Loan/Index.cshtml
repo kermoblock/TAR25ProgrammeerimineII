@@ -5,44 +5,42 @@
 }
 
 <div class="container py-5">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
-        <div>
-            <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 mb-2">LIBRARY MANAGEMENT</span>
-            <h1 class="display-5 fw-bold mb-2">Book Loans</h1>
-            <p class="text-muted mb-0">Track borrowed books and their return dates.</p>
-        </div>
-        <a asp-action="Create" asp-controller="Loan" class="btn btn-primary btn-lg rounded-3 shadow-sm px-4">
-            + New Loan
-        </a>
+    <div>
+        <h1 class="display-5 fw-bold mb-2">Book Loans</h1>
     </div>
+    
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
 
-    <div class="row g-3 mb-4">
+        <a asp-action="Create"
+           asp-controller="Loan"
+           class="btn btn-primary btn-lg rounded-3 shadow-sm px-4 text-nowrap d-flex align-items-center justify-content-center"
+           style="min-width: 160px;">
+            New Loan
+        </a>
+
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4">
-                <div class="card-body p-4">
-                    <p class="text-muted mb-1">Total Loans</p>
-                    <h3 class="fw-bold mb-0">@Model.Count()</h3>
-                </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-1">Total Loans</p>
+                <h3 class="fw-bold mb-0">@Model.Count()</h3>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4">
-                <div class="card-body p-4">
-                    <p class="text-muted mb-1">Currently Borrowed</p>
-                    <h3 class="fw-bold mb-0">@Model.Count(loan => loan.ReturnDate == null)</h3>
-                </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-1">Currently Borrowed</p>
+                <h3 class="fw-bold mb-0">@Model.Count(loan => loan.ReturnDate == null)</h3>
             </div>
         </div>
     </div>
 
     <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-        <div class="card-header bg-white border-0 p-4">
-            <h5 class="fw-bold mb-1">Loan Records</h5>
-            <p class="text-muted small mb-0">All registered book loans.</p>
-        </div>
+
+        <div>
+            <h5 class="fw-bold mb-1">  Loan Records</h5>
+        </div>    
+        <br />
 
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
+            <table class="table align-middle mb-0">
                 <thead class="table-light">
                     <tr>
                         <th class="ps-4 py-3">#</th>
@@ -60,18 +58,32 @@
                         {
                             <tr>
                                 <td class="ps-4">@rowNumber</td>
-                                <td>@loan.BookId</td>
-                                <td>@loan.ReaderId</td>
+                                <td>@loan.Title</td>
+                                <td>@loan.FullName</td>
                                 <td>@loan.LoanDate.ToString("dd.MM.yyyy HH:mm")</td>
                                 <td>@(loan.ReturnDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</td>
                                 <td>
                                     @if (loan.ReturnDate == null)
                                     {
-                                        <span class="badge bg-warning-subtle text-dark rounded-pill px-3 py-2">Borrowed</span>
+                                        <span class="badge bg-warning">
+                                            Borrowed
+                                        </span>
+
+                                        @if (loan.ReturnDate == null)
+                                        {
+                                            <a asp-action="Return"
+                                               asp-controller="Loan"
+                                               asp-route-id="@loan.Id"
+                                               class="btn btn-primary btn-sm rounded-3 px-3 ms-2">
+                                                Return the book
+                                            </a>
+                                        }
                                     }
                                     else
                                     {
-                                        <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2">Returned</span>
+                                        <span class="badge bg-success">
+                                            Returned
+                                        </span>
                                     }
                                 </td>
                             </tr>
@@ -83,16 +95,12 @@
                         <tr>
                             <td colspan="6" class="text-center py-5">
                                 <h5 class="fw-bold">No loans yet</h5>
-                                <p class="text-muted mb-0">Click "+ New Loan" to register a loan.</p>
+                                <p class="text-muted mb-0">Click "New Loan" to get started.</p>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-        </div>
-
-        <div class="card-footer bg-white border-0 p-4">
-            <span class="text-muted small">Showing @Model.Count() loan(s)</span>
         </div>
     </div>
 </div>
