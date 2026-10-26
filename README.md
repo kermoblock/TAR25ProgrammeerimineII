@@ -6,8 +6,10 @@ Vastus: DBContexti ülessane on ühendada kood koos andmebaasiga
    ---
    
 2. Miks ei ole hea paigutada kõik andmebaasipäringuid otse kasutajaliidese koodiga
+
 Vastus:
 Kõiki andmebaasipäringuid ei ole hea paigutada otse kasutajaliidese koodi, sest see muudab rakenduse vähem turvaliseks, raskemini hooldatavaks ja keerulisemini laiendatavaks. Seetõttu kasutatakse tavaliselt kolmeosalist arhitektuuri: kasutajaliides, serveripoolne äriloogika ja andmebaas.
+
   ---
 3. Millisese kihti paigutaksid andmebaasiga suhtlemise MVC- või VIPER-arhitektuuris? Põhjenda oma vastust
    
