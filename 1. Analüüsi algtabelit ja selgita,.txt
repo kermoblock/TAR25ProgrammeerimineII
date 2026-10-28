@@ -1,0 +1,29 @@
+1. Analüüsi algtabelit ja selgita, miks kõigi andmete hoidmine ühes tabelis on probleemne
+
+Vastus: Kui hoida kõik andmed ühes tabelis, siis on väga kerge, et sarnase nimega andmed lähevad sassi ja kui sul ei ole sarnase nimega
+objektide ees mingi eristatava nime
+
+2. Tuvasta korduvad andmerühmad ning võimalikud andmete lisamise muutmise ja kustutamise anomaaliad
+
+Vastus: Korduvad andmerühmad: Andmed, Nimetus, E-post, Nimi, Telefon, Isikukood
+
+Anomaaliad:
+
+Lisamine: Ei saa lisada uut andmestikku
+
+Muutmine: Andmed muutuvad rohkem kui ühes kohas
+
+Kustutamine: Rohkem kui üks objekt kustutatakse
+
+3. Selgita esimese, teise ja kolmanda normaalvormi nõudeid ning rakenda neid algtabelile
+
+Vastus:
+
+Esimene: Tabel jaotatakse osadeks
+
+Teine: Primaarvõtme ja võõrvõtmetega on loodud ühendused
+
+Kolmas: 
+
+4. Jaga algtabel ligikaudu kümneks loogiliseks tabeliks
+
