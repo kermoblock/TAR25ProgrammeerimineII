@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<ShopTARpe25.Models.Spaceship.SpaceshipIndexViewModel>
 
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
 @{
     int rownumber = 1;
 }
-<div>
-    <a asp-action="create" asp-controller="Spaceship" type="submit" class="btn btn-primary">Create</a>
-</div>
 
-<div class="h1">
+<h1>
     Spaceship
-</div>
+</h1>
+<br />
+
 <form method="get">
-    <table class="table table-hover" id="osa1">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Nr</th>
@@ -43,3 +44,8 @@
         </tbody>
     </table>
 </form>
+<br />
+
+<div>
+    <a asp-action="create" asp-controller="Spaceship" type="submit" class="btn btn-primary">Create</a>
+</div>

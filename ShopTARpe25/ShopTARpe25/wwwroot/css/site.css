@@ -55,7 +55,7 @@ body {
 
 
 body {
-    background-image: url("../css/space.jpg");
+    background-image: url(https://www.nasa.gov/wp-content/uploads/2026/09/m101-lg.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -102,6 +102,39 @@ footer {
                 text-shadow: 0 0 5px #ffffff, 0 0 12px #a875ff;
             }
 }
+
+form {
+    background: linear-gradient( 90deg, #16002e, #32106b, #123b72, #16002e ) !important;
+    border: 1px solid rgba(180, 130, 255, 0.8);
+    border-radius: 10px;
+    /* Purple and blue glow around the edges */
+    box-shadow: 0 0 8px rgba(160, 70, 255, 0.7), 0 0 18px rgba(70, 130, 255, 0.5);
+    padding: 12px 20px;
+}
+
+/* Spaceship tabeli läbipaistev taust */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: white;
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.1);
+    --bs-table-hover-color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+#details {
+    background: linear-gradient( 90deg, #16002e, #32106b, #123b72, #16002e ) !important;
+    border: 1px solid rgba(180, 130, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(160, 70, 255, 0.7), 0 0 18px rgba(70, 130, 255, 0.5);
+    padding: 12px 20px;
+}
+
+#detailtext {
+    color: #000;
+}
+
 
 
 
