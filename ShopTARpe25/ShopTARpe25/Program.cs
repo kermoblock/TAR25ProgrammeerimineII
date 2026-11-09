@@ -16,6 +16,8 @@ namespace ShopTARpe25
 
             builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
 
+            builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
+
             //see on dependancy injection, mis võimaldab meil kasutada teenuseid controllerites
             builder.Services.AddScoped<IFileServices, FileServices>();
 
