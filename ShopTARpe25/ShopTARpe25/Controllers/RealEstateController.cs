@@ -58,6 +58,15 @@ namespace ShopTARpe25.Controllers
                 Address = model.Address,
                 RoomNumber = model.RoomNumber,
                 BuildingType = model.BuildingType,
+                Files = model.Files,
+                Image = model.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        RealEstateId = x.RealEstateId
+                    }).ToArray()
             };
 
             var result = await _realEstateServices.Create(dto);
