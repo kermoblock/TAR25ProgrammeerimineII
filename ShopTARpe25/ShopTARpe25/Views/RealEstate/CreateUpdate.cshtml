@@ -2,64 +2,51 @@
 
 @if (Model.Id.HasValue)
 {
-    <h1>Real Estate</h1>
+    <h1>RealEstate Update</h1>
 }
 else
 {
-    <h1>Real Estate Create</h1>
+    <h1>RealEstate Create</h1>
 }
 
 <div>
-    Real Estate Create
-</div>
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="ModifiedAt" type="hidden" />
 
-<form method="post" enctype="multipart/form-data">
-    <input asp-for="Id" type="hidden" />
-    <input asp-for="CreatedAt" type="hidden" />
-    <input asp-for="ModifiedAt" type="hidden" />
-
-    <div>
-        <label asp-for="Area" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
+        <div class="form-group">
+            <label asp-for="Area" class="control-label"></label>
             <input asp-for="Area" class="form-control" />
+            <span asp-validation-for="Area" class="text-danger"></span>
         </div>
-    </div>
 
-    <div>
-        <label asp-for="Address" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
             <input asp-for="Address" class="form-control" />
         </div>
-    </div>
 
-    <div>
-        <label asp-for="RoomNumber" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
+        <div class="form-group">
+            <label asp-for="RoomNumber" class="control-label"></label>
             <input asp-for="RoomNumber" class="form-control" />
+            <span asp-validation-for="RoomNumber" class="text-danger"></span>
         </div>
-    </div>
 
-    <div>
-        <label asp-for="BuildingType" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
+        <div class="form-group">
+            <label asp-for="BuildingType" class="control-label"></label>
             <input asp-for="BuildingType" class="form-control" />
         </div>
-    </div>
 
-    <hr />
+        @if (Model.Id.HasValue)
+        {
+            <input asp-action="update" asp-controller="realEstate" type="submit" class="btn btn-success" value="Update" />
+        }
+        else
+        {
+            <input asp-action="create" asp-controller="realEstate" type="submit" class="btn btn-success" value="Create" />
+        }
 
-    @if (Model.Id.HasValue)
-    {
-        <input asp-action="update" asp-controller="realEstate" type="submit" class="btn btn-primary" value="Update" />
-
-    }
-    else
-    {
-        <input asp-action="create" asp-controller="realEstate" type="submit" class="btn btn-primary" value="Create" />
-    }
-
-    <div class="form-group">
-   
-        <a asp-action="Index" asp-controller="realEstate" class="btn btn-secondary">Back to List</a>
-    </div>
-</form>
+        <a asp-action="Index" asp-controller="realEstate" class="btn btn-success">Back</a>
+    </form>
+</div>
