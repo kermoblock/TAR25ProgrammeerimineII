@@ -7,6 +7,6 @@
 
         //kuna pilt tehtakse väikesteks byte-ideks
         public byte[]? ImageData { get; set; }
-        public Guid RealEstateId { get; set; }
+        public Guid? RealEstateId { get; set; }
     }
 }

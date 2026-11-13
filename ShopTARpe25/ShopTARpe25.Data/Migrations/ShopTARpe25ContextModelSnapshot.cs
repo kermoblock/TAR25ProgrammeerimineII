@@ -51,7 +51,7 @@ namespace ShopTARpe25.Data.Migrations
                     b.Property<string>("ImageTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RealEstateId")
+                    b.Property<Guid?>("RealEstateId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
