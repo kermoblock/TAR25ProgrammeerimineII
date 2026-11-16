@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace ShopTARpe25.Core.Domain
 {
     public class FileToDatabase
