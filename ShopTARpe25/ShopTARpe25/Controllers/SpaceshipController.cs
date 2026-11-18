@@ -270,7 +270,7 @@ namespace ShopTARpe25.Controllers
             };
 
             //kutsuda tenuse meetodit, mis kustutab pildi andmebaasist
-            var image = await _fileService.RemoveImageFromApi(dto);
+            var image = await _fileService.RemoveImagesFromDatabase(dto);
             if (image == null)
             {
                 return RedirectToAction(nameof(Index));

@@ -67,7 +67,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             }
         }
 
-        public async Task<FileToApi> RemoveImageFromApi(FileToApiDto dto)
+        public async Task<FileToApi> RemoveImagesFromDatabase(FileToApiDto dto)
         {
             //kui on vaja kustutada fail, siis tuleb see üles leida
             var imageId = await _context.FileToApis
@@ -142,5 +142,24 @@ namespace ShopTARpe25.ApplicationServices.Services
                 }
             }
        }
+
+        public async Task<FileToDatabase> RemoveImageFromDatabase(FileToDatabaseDto dto)
+        {
+
+                //kui on vaja kustutada fail, siis tuleb see üles leida
+                var imageId = await _context.FileToDatabases
+                    .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+                _context.FileToDatabases.Remove(imageId);
+                await _context.SaveChangesAsync();
+
+            if (imageId == null)
+            {
+                return null;
+            }
+
+
+            return imageId;
+        }
     }
 }
