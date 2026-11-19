@@ -4,6 +4,7 @@ using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace ShopTARpe25.ApplicationServices.Services
@@ -161,5 +162,22 @@ namespace ShopTARpe25.ApplicationServices.Services
 
             return imageId;
         }
+        
+        //kui kustutad mitu pilti, siis peab olema masiivis ehk []
+        public async Task<FileToDatabase> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos)
+        {
+
+            foreach (var dto in dtos)
+            {
+                var imageId = await _context.FileToDatabases
+                    .Where(x => x.Id == dto.Id)
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+                _context.FileToDatabases.Remove(imageId);
+                await _context.SaveChangesAsync();
+            }
+            return null;
+        }
+
     }
 }
