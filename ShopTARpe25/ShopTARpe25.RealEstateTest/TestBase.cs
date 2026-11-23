@@ -5,6 +5,8 @@ using ShopTARpe25.Data;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using ShopTARpe25.RealEstateTest.Macros;
+using Microsoft.Extensions.Hosting;
+using ShopTARpe25.RealEstateTest.Mock;
 
 namespace ShopTARpe25.RealEstateTest
 {
@@ -35,6 +37,11 @@ namespace ShopTARpe25.RealEstateTest
         {
 
             services.AddScoped<IRealEstateServices, RealEstateServices>();
+            //miks pidi lisama kaks servict juurde, kuigi me tahame testida ainult RealEstate CRUDi?
+            //sest File-id on ikka seotud Real Estate Create-iga
+
+            services.AddScoped<IFileServices, FileServices>();
+            services.AddScoped<IHostEnvironment, MockIHostEnvironment>();
 
             // Registreerime andmebaasi konteksti.
             services.AddDbContext<ShopTARpe25Context>(options =>
