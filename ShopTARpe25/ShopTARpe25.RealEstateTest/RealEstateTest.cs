@@ -33,27 +33,75 @@ namespace ShopTARpe25.RealEstateTest
 
             //nüüd uurite kuidas testi käima panna
 
-
         }
 
 
         //teha test, kus otsib ankeeti id alusel, aga seda ei ole andmebaasis
-        public class RealEstateTest2 : TestBase
+
+        [Fact]
+        public async Task ShouldNot_FindRealEstate_WhenIdDoesNotExist()
         {
-            [Fact]
-            public async Task ShouldNot_FindRealEstate_WhenIdDoesNotExist()
-            {
-                // Arrange
-                Guid databaseGuid = Guid.Parse("54cfecb3-1cf8-4ef4-ab28-7699de10b700");
-                Guid wrongGuid = Guid.NewGuid();
+            // Arrange
+            Guid databaseGuid = Guid.Parse("54cfecb3-1cf8-4ef4-ab28-7699de10b700");
+            Guid wrongGuid = Guid.NewGuid();
 
-                // Act
-                await Svc<IRealEstateServices>().DetailsAsync(databaseGuid);
+            // Act
+            await Svc<IRealEstateServices>().DetailsAsync(databaseGuid);
 
-                // Assert
-                //vastupidist loogikat tuleb kasutada
-                Assert.NotEqual(wrongGuid, databaseGuid);
-            }
+            // Assert
+            //vastupidist loogikat tuleb kasutada
+            Assert.NotEqual(wrongGuid, databaseGuid);
         }
+
+        //mul on vaja testida DetailsAsync meetotit
+        //leiab ankeedi üles
+        [Fact]
+
+        public async Task Test_DetailsAsync()
+        {
+            //kui vajutad nupule, siis see guid saadetakse andmebaasi, mida võrreldatakse
+            Guid guid = Guid.Parse("cc78bce1-0537-4b8a-9bd6-bbcb6b647a57");
+            //see guid on juba dnmebaasis olemas ankeedi juures
+            Guid databaseGuid = Guid.Parse("cc78bce1-0537-4b8a-9bd6-bbcb6b647a57");
+
+            await Svc<IRealEstateServices>().DetailsAsync(guid);
+
+            Assert.Equal(databaseGuid, guid);
+        }
+
+        //kustutamise meetodit on vaja testida, andmebaasis on ankeet, mida tahan ära kustutada
+
+        [Fact]
+        public async Task Should_DeleteByIdRealEstate_WhenDeleteRealEstate()
+        {
+
+            // Arrange
+            RealEstateDto dto = MockRealEstateData();
+
+            //Act
+            var addRealEstate = await Svc<IRealEstateServices>().Create(dto);
+            var deleteRealEstate = await Svc<IRealEstateServices>().Delete((Guid)addRealEstate.Id);
+
+            // Assert
+            //võrdlen Id-sid, kas kustutasin ära selle, mis oli andmebaasis
+            Assert.Equal(addRealEstate.Id, deleteRealEstate.Id);
+
+
+
+        }
+
+        private RealEstateDto MockRealEstateData()
+        {
+            return new RealEstateDto
+            {
+                Area = 88.65,
+                Address = "Test location",
+                RoomNumber = 3,
+                BuildingType = "house",
+                CreatedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
+            };
+        }
+
     }
 }
