@@ -96,9 +96,7 @@ namespace ShopTARpe25.ApplicationServices.Services
                 }).ToArrayAsync();
 
             await _fileServices.RemoveImagesFromDatabase(images);
-            await _context.RealEstates
-                    .Where(x => x.Id == Id)
-                    .ExecuteDeleteAsync();
+            _context.RealEstates.Remove(result);
 
             await _context.SaveChangesAsync();
 
