@@ -4,6 +4,7 @@ using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ShopTARpe25.RealEstateTest
@@ -85,10 +86,64 @@ namespace ShopTARpe25.RealEstateTest
             // Assert
             //võrdlen Id-sid, kas kustutasin ära selle, mis oli andmebaasis
             Assert.Equal(addRealEstate.Id, deleteRealEstate.Id);
+        }
 
+        //mul on kaks ankeeti loodud ja ühe kustutan ära
+        //assertis võrdlen, kas need kaks on ühesugused
+        [Fact]
+        public async Task Should_CreateTwoDatabases_And_DeleteOne()
+        {
+            //Arrange
+            RealEstateDto dto = MockRealEstateData();
 
+            //Act
+            var addRealEstate = await Svc<IRealEstateServices>().Create(dto);
+
+            var addRealEstate2 = await Svc<IRealEstateServices>().Create(dto);
+
+            var deleteRealEstate = await Svc<IRealEstateServices>().Delete((Guid)addRealEstate.Id);
+
+            //Assert
+            Assert.NotEqual(addRealEstate2.Id, deleteRealEstate.Id);
+        }
+
+        //uuendab andmeid
+
+        [Fact]
+        public async Task Should_UpdateRealEstate_WhenReturnResult()
+        {
+            // Arrange
+
+            var guid = new Guid("cc78bce1-0537-4b8a-9bd6-bbcb6b647a57");
+
+            RealEstateDto dto = MockRealEstateData();
+            RealEstateDto domain = new();
+
+            domain.Id = guid;
+            domain.Area = 200;
+            domain.Address = "Updated Location";
+            domain.RoomNumber = 5;
+            domain.BuildingType = "Mansion";
+            domain.CreatedAt = DateTime.UtcNow;
+            domain.ModifiedAt = DateTime.UtcNow;
+
+            // Act
+            await Svc<IRealEstateServices>().Update(dto);
+
+            // Assert
+            Assert.Equal(domain.Id, guid);
+            Assert.NotEqual(dto.Area, domain.Area);
+            Assert.DoesNotMatch(dto.RoomNumber.ToString(), domain.RoomNumber.ToString());
+            Assert.DoesNotMatch(dto.Address, domain.Address);
+        }
+
+        [Fact]
+        public async Task Should_UpdateRealEstate_WhenUpdateDataVersion2()
+        {
 
         }
+
+
 
         private RealEstateDto MockRealEstateData()
         {
@@ -102,6 +157,5 @@ namespace ShopTARpe25.RealEstateTest
                 ModifiedAt = DateTime.UtcNow
             };
         }
-
     }
 }
